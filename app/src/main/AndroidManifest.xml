@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubUserViewer">
+        <activity android:name=".UserDetailActivity"></activity>
         <activity android:name=".UsersActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

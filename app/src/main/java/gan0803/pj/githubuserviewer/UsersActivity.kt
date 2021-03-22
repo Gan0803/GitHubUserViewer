@@ -1,5 +1,6 @@
 package gan0803.pj.githubuserviewer
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -42,5 +43,8 @@ class UsersActivity : AppCompatActivity() {
 
     private fun adapterOnClick(user: User) {
         Log.d(TAG, "list item is clicked")
+        val intent = Intent(this, UserDetailActivity::class.java)
+        intent.putExtra(getString(R.string.url_extra_key), user.htmlUrl)
+        startActivity(intent)
     }
 }
