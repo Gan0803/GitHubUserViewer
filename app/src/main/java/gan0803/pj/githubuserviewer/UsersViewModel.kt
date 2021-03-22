@@ -21,9 +21,11 @@ class UsersViewModel(val dataSource: DataSource) : ViewModel() {
     private val github: GitHubApi = GitHubApi(provider.retrofit)
     val usersLiveData: LiveData<List<User>> = dataSource.getUsers()
 
-    fun listUsers(query: String) {
+    fun listUsers() {
         viewModelScope.launch(Dispatchers.IO) {
-            github.listUsers(query).also { response ->
+            val lastUser: User? = usersLiveData.value?.takeLast(1)?.get(0)
+            val since = lastUser?.id ?: 0
+            github.listUsers(since).also { response ->
                 if (response.isSuccessful) {
                     Log.d(TAG, "response is success")
                     val userList = response.body()!!
