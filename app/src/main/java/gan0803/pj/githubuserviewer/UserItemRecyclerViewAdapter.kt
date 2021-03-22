@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import gan0803.pj.githubuserviewer.model.User
 
 class UserItemRecyclerViewAdapter(
@@ -32,7 +33,7 @@ class UserItemRecyclerViewAdapter(
             currentUser = user
             userName.text = user.login
             if (user.avatarUrl != "") {
-                avatar.setImageResource(R.drawable.ic_launcher_foreground)
+                Glide.with(itemView).load(user.avatarUrl).into(avatar)
             } else {
                 avatar.setImageResource(R.drawable.ic_launcher_foreground)
             }
