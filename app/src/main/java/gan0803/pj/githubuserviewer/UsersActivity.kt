@@ -31,13 +31,19 @@ class UsersActivity : AppCompatActivity() {
             }
         })
 
-        usersViewModel.listUsers("")
+        usersViewModel.listUsers()
 
         val recyclerView = findViewById<RecyclerView>(R.id.users_recyclerview)
         with(recyclerView) {
             layoutManager = LinearLayoutManager(context)
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             adapter = userListAdapter
+            addOnScrollListener(object :
+                UsersScrollListener(layoutManager as LinearLayoutManager, 10) {
+                override fun onLoadMore(current_page: Int) {
+                    usersViewModel.listUsers()
+                }
+            })
         }
     }
 
